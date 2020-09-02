@@ -235,8 +235,8 @@ public class Adam : GameCharacter
 				_selectedEntity.Damage(strength);
 			}
 
-			gameManager.ShakeCamera(0.3f, 1.2f, 0.1f);
-			gameManager.SkipFrame(10);
+			gameManager.ShakeCamera(0.8f, 1.5f, 0.26f);
+			//gameManager.SkipFrame(10);
 
 			_selectedEntity = null;
 
@@ -316,7 +316,7 @@ public class Adam : GameCharacter
 			gameManager.soundController.PlaySoundEffect(shootSFX);
 
 			var fireball = Instantiate(fireballPrefab, currentTile.basePosition, Quaternion.identity);
-			gameManager.ShakeCamera(0.8f, 1.2f, 0.3f);
+			gameManager.ShakeCamera(1f, 1.6f, 0.28f);
 
 			yield return fireball.Shoot(this, currentTile, deltaX, deltaY, fireballSpeed);
 			yield return new WaitForSeconds(0.2f);

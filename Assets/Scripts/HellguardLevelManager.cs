@@ -47,8 +47,8 @@ public class HellguardLevelManager : LevelLogicManager
 
 			yield return new WaitUntil(() => gameManager.hasDroppedAdam);
 
-			gameManager.ShakeCamera(0.5f, 1.5f, 0.1f);
-			gameManager.SkipFrame(3);
+			gameManager.ShakeCamera(1f, 1.5f, 0.32f);
+			//gameManager.SkipFrame(3);
 
 			Boulder boulder = default;
 			if (dropHintBoulder)

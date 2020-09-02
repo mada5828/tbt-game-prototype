@@ -154,7 +154,7 @@ public class Hellguard : GameCharacter
 			gameManager.soundController.PlaySoundEffect(shootSFX);
 
 			var fireball = Instantiate(fireballPrefab, currentTile.basePosition, Quaternion.identity);
-			gameManager.ShakeCamera(0.3f, 1.2f, 0.2f);
+			gameManager.ShakeCamera(0.9f, 1.6f, 0.26f);
 
 			yield return fireball.Shoot(this, currentTile, correctPatrolTile.gridX - currentTile.gridX, correctPatrolTile.gridY - currentTile.gridY, fireballSpeed);
 			yield return new WaitForSeconds(1f);
@@ -226,8 +226,8 @@ public class Hellguard : GameCharacter
 				occupant.Throw(originTile);
 				occupant.Damage(strength);
 
-				gameManager.ShakeCamera(0.3f, 1.2f, 0.1f);
-				gameManager.SkipFrame(10);
+				gameManager.ShakeCamera(0.9f, 1.5f, 0.27f);
+				//gameManager.SkipFrame(10);
 
 				break;
 			}
@@ -332,7 +332,7 @@ public class Hellguard : GameCharacter
 
 			transform.position = centerTile.basePosition;
 			gameManager.soundController.PlaySoundEffect(gameManager.dropSFX);
-			gameManager.ShakeCamera(0.3f, 1.2f, 0.2f);
+			gameManager.ShakeCamera(1.2f, 1.6f, 0.3f);
 
 			currentTile = centerTile;
 
@@ -445,7 +445,7 @@ public class Hellguard : GameCharacter
 				yield return new WaitForSeconds(1f);
 
 				gameManager.soundController.PlaySoundEffect(berserkShootSFX);
-				gameManager.ShakeCamera(1f, 1.3f, 0.35f);
+				gameManager.ShakeCamera(1.1f, 1.5f, 0.28f);
 			}
 			else
 			{
