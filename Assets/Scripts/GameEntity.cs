@@ -13,6 +13,7 @@ public abstract class GameEntity : MonoBehaviour
 	[SerializeField] private AudioClip _dieSFX = default;
 
 	new public Transform transform { get; private set; }
+	new public Collider collider { get; private set; }
 	public GameManager gameManager { get; protected set; }
 	public Tile currentTile { get; protected set; }
 	public int currentHealth { get; protected set; }
@@ -26,6 +27,7 @@ public abstract class GameEntity : MonoBehaviour
 	protected virtual void Awake()
 	{
 		transform = base.transform;
+		collider = GetComponent<Collider>();
 	}
 
 	public virtual void Initialize(GameManager gameManager, Tile tile)
@@ -125,6 +127,7 @@ public abstract class GameEntity : MonoBehaviour
 	{
 		onWillDie?.Invoke(this);
 		gameManager.soundController.PlaySoundEffect(_dieSFX);
+		collider.enabled = false;
 
 		if (lingerTimeBeforeDeath == 0)
 		{

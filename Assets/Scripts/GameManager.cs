@@ -394,16 +394,9 @@ public class GameManager : MonoBehaviour
 	{
 		foreach (var tile in _tiles)
 		{
-			if (tile.isOccupied)
+			if (tile.isOccupied && tile.occupant.collider != null)
 			{
-				var colliders = tile.occupant.GetComponentsInChildren<Collider>();
-				if (colliders != null)
-				{
-					foreach (var collider in colliders)
-					{
-						collider.enabled = tilesWithActiveEntityColliders.Contains(tile);
-					}
-				}
+				tile.occupant.collider.enabled = tilesWithActiveEntityColliders.Contains(tile);
 			}
 		}
 	}
