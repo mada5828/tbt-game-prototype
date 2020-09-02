@@ -67,6 +67,7 @@ public class Adam : GameCharacter
 
 	public override void StartTurn()
 	{
+		StopAllCoroutines();
 		StartCoroutine(HandlePlayerControl());
 	}
 
