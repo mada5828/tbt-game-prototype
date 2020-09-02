@@ -123,7 +123,16 @@ public class Hellguard : GameCharacter
 	public IEnumerator Move()
 	{
 		int correctionMoves = 0;
-		if (!_patrolRoute.Contains(currentTile))
+		if (_patrolRoute.Contains(currentTile))
+		{
+			var currentIndex = _patrolRoute.IndexOf(currentTile);
+			if (currentIndex != _currentPatrolIndex)
+			{
+				_currentPatrolIndex = currentIndex;
+				_nextPatrolIndex = CalculateNextPatrolIndex();
+			}
+		}
+		else
 		{
 			correctionMoves = 1;
 
@@ -264,7 +273,14 @@ public class Hellguard : GameCharacter
 					}
 					else
 					{
-						return CheckLooksSafeToMove(CalculatePatrolIndex(nextPatrolIndex, _direction), CalculatePatrolIndex(nextPatrolIndex, _direction * 2), 0);
+						if (_patrolRoute.Contains(adamTile))
+						{
+							return true;
+						}
+						else
+						{
+							return CheckLooksSafeToMove(CalculatePatrolIndex(nextPatrolIndex, _direction), CalculatePatrolIndex(nextPatrolIndex, _direction * 2), 0);
+						}
 					}
 				}
 				else
