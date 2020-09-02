@@ -1,0 +1,4 @@
+Developed 2020 by Dennis Samuel
+
+The project is using CC0 public domain audio files as well as 100% free fonts,
+all of which are available on OpenGameArt.org, available on dafont.com
