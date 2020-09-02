@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
 			_uiController.mainMenu.SetActive(false);
 			_uiController.gameMenu.SetActive(true);
 			_uiController.levelClearedScreen.SetActive(false);
+			_uiController.ShowLoreDump();
 
 			StartGameLoop(false);
 		}
@@ -163,6 +164,11 @@ public class GameManager : MonoBehaviour
 
 		IEnumerator InitiateLevel()
 		{
+			if (!isRestart && _level == 0)
+			{
+				yield return _uiController.ShowLoreDump();
+			}
+
 			if (isRestart || _level == 0)
 			{
 				_soundController.SwitchBGM(_levelBGM, true);

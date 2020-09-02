@@ -19,6 +19,7 @@ public class UiController : MonoBehaviour
 	public GameObject loseMenu;
 	public GameObject thankYouScreen;
 	public GameObject levelClearedScreen;
+	public GameObject loreDumpScreen;
 	[Space]
 	public GameObject playerMoveButton;
 	public GameObject playerPunchButton;
@@ -32,8 +33,10 @@ public class UiController : MonoBehaviour
 	[Space]
 	[SerializeField] private CanvasGroup _loseGroup = default;
 	[SerializeField] private CanvasGroup _levelClearGroup = default;
+	[SerializeField] private CanvasGroup _loreDumpGroup = default;
 	[SerializeField] private float _levelClearedHoldDuration = 0.2f;
 	[SerializeField] private float _thankYouHoldDuration = 0.2f;
+	[SerializeField] private float _loreDumpHoldDuration = 0.2f;
 	[SerializeField] private Image _fadeOverlayImage = default;
 	[SerializeField] private Transform _playerControlPanelTransform = default;
 	[SerializeField] private Transform _playerCancelTransform = default;
@@ -256,6 +259,26 @@ public class UiController : MonoBehaviour
 		onFinished?.Invoke();
 	}
 
+	public IEnumerator ShowLoreDump()
+	{
+		loreDumpScreen.SetActive(true);
+		_loreDumpGroup.alpha = 1;
+		yield return new WaitForSeconds(_loreDumpHoldDuration);
+		_gameManager.StartCoroutine(Hide());
+
+
+		IEnumerator Hide()
+		{
+			for (float d = 0.5f, t = d; t > 0; t -= Time.deltaTime)
+			{
+				_loreDumpGroup.alpha = t / d;
+				yield return null;
+			}
+			_loreDumpGroup.alpha = 0f;
+			loreDumpScreen.SetActive(false);
+		}
+	}
+
 	public void ShowThankYou()
 	{
 		StartCoroutine(Show());
@@ -280,7 +303,6 @@ public class UiController : MonoBehaviour
 			_messageText.gameObject.SetActive(false);
 		}
 	}
-
 
 	public void ShowLevelCleared(Action nextAction)
 	{
