@@ -58,8 +58,13 @@ public class UiController : MonoBehaviour
 
 	private void DoClickAction(Action action)
 	{
-		_gameManager.soundController.PlaySoundEffect(_clickSFX);
+		PlayClickSFX();
 		action();
+	}
+
+	public void PlayClickSFX()
+	{
+		_gameManager.soundController.PlaySoundEffect(_clickSFX);
 	}
 
 	public void StartGame()
@@ -94,19 +99,19 @@ public class UiController : MonoBehaviour
 
 	public void PlayerChooseMove()
 	{
-		_gameManager.soundController.PlaySoundEffect(_clickSFX);
+		PlayClickSFX();
 		onChoosePlayerAction?.Invoke(PlayerAction.Move);
 	}
 
 	public void PlayerChoosePunch()
 	{
-		_gameManager.soundController.PlaySoundEffect(_clickSFX);
+		PlayClickSFX();
 		onChoosePlayerAction?.Invoke(PlayerAction.Punch);
 	}
 
 	public void PlayerChooseShoot()
 	{
-		_gameManager.soundController.PlaySoundEffect(_clickSFX);
+		PlayClickSFX();
 		onChoosePlayerAction?.Invoke(PlayerAction.Shoot);
 	}
 
