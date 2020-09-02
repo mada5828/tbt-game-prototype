@@ -56,6 +56,11 @@ public class UiController : MonoBehaviour
 	public bool isFading { get; private set; }
 	public bool isShowingLevelTitle { get; private set; }
 
+	private void Awake()
+	{
+		InitializeDisplaySettings();
+	}
+
 	private void DoClickAction(Action action)
 	{
 		PlayClickSFX();
@@ -328,5 +333,62 @@ public class UiController : MonoBehaviour
 			yield return new WaitForSeconds(_levelClearedHoldDuration);
 			nextAction?.Invoke();
 		}
+	}
+
+	private void InitializeDisplaySettings()
+	{
+		if (PlayerPrefs.HasKey("display_fullscreen")) { SetDisplayFullscreen(PlayerPrefs.GetInt("display_fullscreen") == 1); }
+		else { SetDisplayFullscreen(true); }
+
+		if (!PlayerPrefs.HasKey("display_resmode")) { SetDisplayHighRes(); }
+		else
+		{
+			switch (PlayerPrefs.GetInt("display_resmode"))
+			{
+				case 0: SetDisplayHighRes(); break;
+				case 1: SetDisplayMidRes(); break;
+				case 2: SetDisplayLowRes(); break;
+			}
+		}
+	}
+
+	public void ToggleDisplayFullscreen()
+	{
+		SetDisplayFullscreen(Screen.fullScreenMode != FullScreenMode.ExclusiveFullScreen);
+	}
+
+	public void SetDisplayFullscreen(bool fullscreen)
+	{
+		PlayerPrefs.SetInt("display_fullscreen", fullscreen ? 1 : 0);
+		Screen.fullScreenMode = fullscreen ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
+	}
+
+	private void SetResolution(float multipler)
+	{
+		var display = Display.main;
+		var w = (int)(display.systemWidth * multipler);
+		var h = (int)(display.systemHeight * multipler);
+
+		display.SetRenderingResolution(w, h);
+		Screen.SetResolution(w, h, Screen.fullScreenMode);
+	}
+
+	public void SetDisplayHighRes()
+	{
+		PlayerPrefs.SetInt("display_resmode", 0);
+		SetResolution(1f);
+		Screen.SetResolution(Mathf.Max(Display.main.systemWidth, 1920), Mathf.Max(Display.main.systemHeight, 1080), Screen.fullScreenMode);
+	}
+
+	public void SetDisplayMidRes()
+	{
+		SetResolution(0.67f);
+		Screen.SetResolution(1280, 720, Screen.fullScreenMode);
+	}
+
+	public void SetDisplayLowRes()
+	{
+		SetResolution(0.33f);
+		Screen.SetResolution(640, 360, Screen.fullScreenMode);
 	}
 }
