@@ -6428,7 +6428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: designed & developed by Dennis Samuel, 2020
+  m_text: I hope you had fun :)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d85b1c5be06b6fc43a3b0d02bbd118c5, type: 2}
   m_sharedMaterial: {fileID: 5240782211254054354, guid: d85b1c5be06b6fc43a3b0d02bbd118c5,
@@ -6498,10 +6498,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1195954345}
-    characterCount: 43
+    characterCount: 19
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 6
+    spaceCount: 4
+    wordCount: 5
     linkCount: 0
     lineCount: 1
     pageCount: 1
