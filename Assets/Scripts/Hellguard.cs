@@ -299,8 +299,11 @@ public class Hellguard : GameCharacter
 
 	private IEnumerator Berserk()
 	{
+		var wasAlreadyOnCenterTile = true;
 		if (currentTile != gameManager.centerTile)
 		{
+			wasAlreadyOnCenterTile = false;
+
 			_isOverridingRotation = true;
 
 			var previousTile = currentTile;
@@ -353,19 +356,43 @@ public class Hellguard : GameCharacter
 
 			SetDirectionTowards(previousTile);
 
-			_berserkDirectionIndex = (_berserkDirectionIndex - _berserkDirectionStep + BerserkDirections.Count) % BerserkDirections.Count;
+			yield return new WaitForSeconds(0.5f);
 		}
 
-		_berserkDirectionIndex = (_berserkDirectionIndex + _berserkDirectionStep + BerserkDirections.Count) % BerserkDirections.Count;
-
-		var adamTile = gameManager.adam.currentTile;
-		if (adamTile.gridX == currentTile.gridX || adamTile.gridY == currentTile.gridY)
+		if (wasAlreadyOnCenterTile)
 		{
-			yield return ShowTemporaryExclamation("!!", 0.5f);
-			SetDirectionTowards(adamTile);
-		}
+			var startingIndex = _berserkDirectionIndex;
+			var foundTarget = false;
 
-		yield return new WaitForSeconds(0.5f);
+			for (int i = 0; !foundTarget && i < BerserkDirections.Count; i++)
+			{
+				_berserkDirectionIndex = (startingIndex - i * _berserkDirectionStep + BerserkDirections.Count) % BerserkDirections.Count;
+
+				var currentDirection = BerserkDirections[_berserkDirectionIndex];
+
+				foreach (var tile in gameManager.tiles)
+				{
+					if (tile.isOccupied && (tile.gridX == currentTile.gridX || tile.gridY == currentTile.gridY) && tile != currentTile)
+					{
+						var deltaX = tile.gridX - currentTile.gridX;
+						var deltaY = tile.gridY - currentTile.gridY;
+
+						if ((deltaY == 0 && (deltaX == 0 ? 0 : deltaX / Mathf.Abs(deltaX)) == currentDirection.x) ||
+							(deltaX == 0 && (deltaY == 0 ? 0 : deltaY / Mathf.Abs(deltaY)) == currentDirection.y))
+						{
+							foundTarget = true;
+							yield return ShowTemporaryExclamation("!!", 0.5f);
+							break;
+						}
+					}
+				}
+
+				if (i != 0)
+				{
+					yield return new WaitForSeconds(0.5f);
+				}
+			}
+		}
 
 		var activeFireballs = 3;
 		var direction = BerserkDirections[_berserkDirectionIndex];
