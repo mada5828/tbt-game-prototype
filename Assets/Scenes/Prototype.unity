@@ -6586,7 +6586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1228332991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6625,7 +6625,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'adam : I''m coming Eve!'
+  m_text: 'Adam : One step at a time..'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d85b1c5be06b6fc43a3b0d02bbd118c5, type: 2}
   m_sharedMaterial: {fileID: 5240782211254054354, guid: d85b1c5be06b6fc43a3b0d02bbd118c5,
@@ -9669,7 +9669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1528429031
 RectTransform:
   m_ObjectHideFlags: 0
