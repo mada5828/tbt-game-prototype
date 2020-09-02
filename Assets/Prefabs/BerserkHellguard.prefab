@@ -58378,6 +58378,9 @@ MonoBehaviour:
   berserkShootChargeSFX: {fileID: 8300000, guid: da9dd31bc2f702642b32151410411543,
     type: 3}
   berserkShootSFX: {fileID: 8300000, guid: 4014929f70208414087cea5c39f657e4, type: 3}
+  berserkBoulderPrefab: {fileID: 6612117651745762028, guid: aa40360403845a94d99b05f23e4c4df6,
+    type: 3}
+  berserkBoulderChance: 0.3
 --- !u!65 &1164595899224989499
 BoxCollider:
   m_ObjectHideFlags: 0

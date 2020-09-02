@@ -10467,7 +10467,6 @@ MonoBehaviour:
   meleeSFX: {fileID: 8300000, guid: 193fb9fe3401ddb45abbba5e0c7947a8, type: 3}
   stunSFX: {fileID: 8300000, guid: ab0213fffde8b8a4c95bf83ad181e94e, type: 3}
   shootSFX: {fileID: 8300000, guid: 4014929f70208414087cea5c39f657e4, type: 3}
-  berserkHealthThreshold: -1
   movement: 3
   speed: 8
   jumpCurve:
@@ -10558,6 +10557,12 @@ MonoBehaviour:
   fireballSpeed: 5
   shootEffect: {fileID: 114783735884366286}
   shootChargeSFX: {fileID: 8300000, guid: 5d8a979b70073694fbcb34ec89000d79, type: 3}
+  berserkHealthThreshold: -1
+  berserkShootEffect: {fileID: 0}
+  berserkShootChargeSFX: {fileID: 0}
+  berserkShootSFX: {fileID: 0}
+  berserkBoulderPrefab: {fileID: 6612117651745762028, guid: aa40360403845a94d99b05f23e4c4df6,
+    type: 3}
 --- !u!65 &1164595899224989499
 BoxCollider:
   m_ObjectHideFlags: 0

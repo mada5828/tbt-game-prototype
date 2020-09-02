@@ -25,6 +25,8 @@ public class Hellguard : GameCharacter
 	public GameObject berserkShootEffect;
 	public AudioClip berserkShootChargeSFX;
 	public AudioClip berserkShootSFX;
+	public Boulder berserkBoulderPrefab;
+	public float berserkBoulderChance;
 
 	private List<Tile> _patrolRoute = new List<Tile>();
 	private int _nextPatrolIndex;
@@ -404,6 +406,27 @@ public class Hellguard : GameCharacter
 		}
 
 		yield return new WaitWhile(() => activeFireballs > 0);
+
+		if (!wasAlreadyOnCenterTile || Random.value < berserkBoulderChance)
+		{
+			var boulderTileCandidates = new List<Tile>();
+			for (int i = 0; i < currentTile.gridX; i++)
+			{
+				var tile = gameManager.GetTile(currentTile.gridX - i * direction.x, currentTile.gridY - i * direction.y);
+				if (tile != null && !tile.isOccupied)
+				{
+					boulderTileCandidates.Add(tile);
+				}
+			}
+
+			if (boulderTileCandidates.Count != 0)
+			{
+				var boulder = gameManager.Spawn(berserkBoulderPrefab, Vector3.zero, false);
+				boulder.Initialize(gameManager, boulderTileCandidates[Random.Range(0, boulderTileCandidates.Count)]);
+				yield return gameManager.Drop(boulder);
+			}
+		}
+
 		yield return new WaitForSeconds(1f);
 
 		gameManager.FinishTurn(this);
