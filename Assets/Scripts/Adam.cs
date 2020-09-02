@@ -191,6 +191,7 @@ public class Adam : GameCharacter
 				if (currentPointedTile != lastPointedTile)
 				{
 					gameManager.HighlightAdamActionTargets(currentTargets, currentPointedTile);
+					lastPointedTile = currentPointedTile;
 				}
 
 				if (_selectedEntity != null)
