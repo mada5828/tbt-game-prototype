@@ -354,13 +354,13 @@ public class UiController : MonoBehaviour
 
 	public void ToggleDisplayFullscreen()
 	{
-		SetDisplayFullscreen(Screen.fullScreenMode != FullScreenMode.ExclusiveFullScreen);
+		SetDisplayFullscreen(Screen.fullScreenMode != FullScreenMode.FullScreenWindow);
 	}
 
 	public void SetDisplayFullscreen(bool fullscreen)
 	{
 		PlayerPrefs.SetInt("display_fullscreen", fullscreen ? 1 : 0);
-		Screen.fullScreenMode = fullscreen ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
+		Screen.fullScreenMode = fullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
 	}
 
 	private void SetResolution(float multipler)
@@ -377,18 +377,17 @@ public class UiController : MonoBehaviour
 	{
 		PlayerPrefs.SetInt("display_resmode", 0);
 		SetResolution(1f);
-		Screen.SetResolution(Mathf.Max(Display.main.systemWidth, 1920), Mathf.Max(Display.main.systemHeight, 1080), Screen.fullScreenMode);
 	}
 
 	public void SetDisplayMidRes()
 	{
+		PlayerPrefs.SetInt("display_resmode", 1);
 		SetResolution(0.67f);
-		Screen.SetResolution(1280, 720, Screen.fullScreenMode);
 	}
 
 	public void SetDisplayLowRes()
 	{
+		PlayerPrefs.SetInt("display_resmode", 2);
 		SetResolution(0.33f);
-		Screen.SetResolution(640, 360, Screen.fullScreenMode);
 	}
 }
