@@ -78,8 +78,12 @@ public abstract class GameEntity : MonoBehaviour
 					transform.position = Vector3.Lerp(origin, target, travelled / distance);
 					travelled += speed * Time.deltaTime;
 
+					yield return null;
+
 					if (!hasCheckedTargetOccupant && travelled > 0.3f * distance)
 					{
+						hasCheckedTargetOccupant = true;
+
 						if (currentHealth > 0)
 						{
 							if (targetTile.isOccupied)
@@ -88,8 +92,6 @@ public abstract class GameEntity : MonoBehaviour
 							}
 						}
 					}
-
-					yield return null;
 				}
 
 				transform.position = target;
